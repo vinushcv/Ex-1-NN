@@ -37,14 +37,62 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+# Importing Libraries
+import pandas as pd                                                 
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+
+# Read the dataset 
+df=pd.read_csv("Churn_Modelling.csv",index_col="RowNumber")         
+df.head()
+#Find missing values
+df.isnull().sum()
+# Check For Duplicates 
+df.duplicated().sum()
+
+# Remove Unnecessary Columns            
+df=df.drop(['Surname', 'Geography','Gender'], axis=1)
+
+# Normalize the dataset
+scaler=StandardScaler()                                             
+df=pd.DataFrame(scaler.fit_transform(df))
+df.head()
+
+# Split the dataset into input and output
+X=df.iloc[:,:-1].values
+Y=df.iloc[:,-1].values                     
+print("X:",X)
+print("Y:",Y)
+
+# Splitting the data for training & Testing          
+Xtrain,Xtest,Ytrain,Ytest = train_test_split(X, Y, test_size=0.2)
+print("Xtrain:" ,Xtrain, "\nXtest:", Xtest)                   # X Train and Test
+print("Ytrain:" ,Ytrain, "\nYtest:", Ytest)                   # Y Train and Test                  
 
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+## Dataset:
+![image](https://github.com/user-attachments/assets/53725466-824d-4dcc-82ea-208cdb549899)
+
+
+## Null values:
+![image](https://github.com/user-attachments/assets/6a4f5dab-1286-40b2-ad1f-a2a6d94c6389)
+
+## Normalizing the data:
+![image](https://github.com/user-attachments/assets/ff43fe63-3f5d-450f-8b74-2e2fb8f5000f)
+
+
+## Data Splitting:
+![image](https://github.com/user-attachments/assets/62f24d63-2f68-4e77-b03f-788cc9c7e400)
+
+## Train and test data:
+![image](https://github.com/user-attachments/assets/d8069b78-312a-4078-8629-af99c60de856)
+![image](https://github.com/user-attachments/assets/fe07de69-cd13-4489-a4e4-45677053925a)
 
 
 ## RESULT:
-Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
+Thus, Implementation of Data Preprocessing is done in python using a dataset downloaded from Kaggle.
 
 
